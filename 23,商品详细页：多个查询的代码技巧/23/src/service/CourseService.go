@@ -1,0 +1,53 @@
+package service
+
+import (
+	"context"
+	. "jtthink/src/Course"
+	"jtthink/src/Mapper"
+)
+func NewCourseModel(id int32,name string) *CourseModel  {
+	return &CourseModel{CourseId:id,CourseName:name}
+}
+type CourseServiceImpl struct{}
+func(this *CourseServiceImpl) ListForTop(ctx context.Context, req *ListRequest, rsp *ListResponse) error{
+	course:=make([]*CourseModel,0)
+	 err:=Mapper.GetCourseListBySql(2).Find(&course).Error
+	if err!=nil{
+		return err
+	}
+	rsp.Result=course
+	return nil
+}
+func(this *CourseServiceImpl) GetDetail(ctx context.Context,req *DetailRequest, rsp *DetailResponse) error{
+	//只取课程详细
+	if req.FetchType==0 || req.FetchType==1{
+		if err:=Mapper.GetCourseDetail(int(req.CourseId)).Find(rsp.Course).Error;err!=nil{
+			return err
+		}
+		return nil
+	}
+	//只取计数表详细
+	if  req.FetchType==2{
+		if err:=Mapper.GetCourseCounts(int(req.CourseId)).Find(rsp.Counts).Error;err!=nil{
+			return err
+		}
+		return nil
+	}
+	//两者都取
+	if req.FetchType==3{
+		if err:=Mapper.GetCourseDetail(int(req.CourseId)).Find(rsp.Course).Error;err!=nil{
+			return err
+		}
+		if err:=Mapper.GetCourseCounts(int(req.CourseId)).Find(rsp.Counts).Error;err!=nil{
+			return err
+		}
+		return nil
+	}
+
+	return nil
+
+}
+
+func NewCourseServiceImpl() *CourseServiceImpl  {
+	return &CourseServiceImpl{}
+}
