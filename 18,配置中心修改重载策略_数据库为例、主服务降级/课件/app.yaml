@@ -1,0 +1,8 @@
+jtthink:
+  config:
+    address: localhost
+    path: /nacos
+    port: 8848
+  service:
+    namespace: go.micro.api
+    name: jtthink.httpcourse

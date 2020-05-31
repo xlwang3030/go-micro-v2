@@ -1,0 +1,8 @@
+jtthink:
+  config:
+    address: localhost
+    path: /nacos
+    port: 8848
+  service:
+    namespace: api.jtthink.com
+    name: http.course

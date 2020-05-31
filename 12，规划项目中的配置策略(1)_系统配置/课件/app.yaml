@@ -1,0 +1,5 @@
+jtthink:
+  config:
+    address: localhost
+    path: /nacos
+    port: 8848
