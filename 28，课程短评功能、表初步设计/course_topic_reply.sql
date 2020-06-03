@@ -28,7 +28,7 @@ CREATE TABLE `course_topic_reply`  (
   `user_id` int(11) NULL DEFAULT NULL COMMENT '回复用户ID',
   `likes` int(11) NULL DEFAULT NULL COMMENT '认同',
   `unlikes` int(11) NULL DEFAULT NULL COMMENT '不认同',
-  `addtime` timestamp(0) NULL DEFAULT NULL COMMENT '入库时间',
+  `addtime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '入库时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 

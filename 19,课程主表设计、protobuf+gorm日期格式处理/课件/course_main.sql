@@ -27,7 +27,7 @@ CREATE TABLE `course_main`  (
   `course_disp_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `course_price` decimal(10, 2) NULL DEFAULT 0.00,
   `course_price2` decimal(10, 0) NULL DEFAULT 0,
-  `addtime` timestamp(0) NULL DEFAULT NULL,
+  `addtime` timestamp(0) NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`course_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
