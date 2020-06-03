@@ -1,0 +1,51 @@
+syntax = "proto3";
+import "Common.proto";
+package  Course;
+
+
+service CourseService {
+    rpc ListForTop(ListRequest) returns (ListResponse);
+    rpc GetDetail(DetailRequest) returns(DetailResponse);
+}
+message CourseModel{
+    int32 course_id=1;
+    string course_name=2;
+    string course_disp_name=3;
+    string course_intr=4;
+    float course_price=5;
+    float course_price2=6;
+    // @inject_tag: gorm:"type:timestamp"
+    Timestamp addtime=7;
+}
+
+message ListRequest {
+    // @inject_tag: form:"size"
+    int32 size = 1;
+    // @inject_tag: form:"page"
+    int32 page = 2;
+}
+message DetailRequest{
+    // @inject_tag: uri:"course_id"
+    int32 course_id=1;
+    // @inject_tag: header:"fetch_type"
+    int32 fetch_type=2;
+}
+//计数
+message CourseCounts{
+    // @inject_tag: json:"-"
+    int32 count_id=1;
+    // @inject_tag: json:"-"
+    int32 course_id=2;
+    string count_key=3;
+    int32 count_value=4;
+}
+
+message ListResponse {
+    repeated CourseModel result = 1;
+    PageInfo pageinfo=2;
+}
+message DetailResponse{
+    CourseModel course=1;
+    repeated  CourseCounts counts=2;
+
+}
